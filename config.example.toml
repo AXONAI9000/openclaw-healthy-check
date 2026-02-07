@@ -1,0 +1,22 @@
+[monitor]
+interval_seconds = 30
+failure_threshold = 3
+timeout_seconds = 10
+
+[openclaw]
+health_cmd = "openclaw health --json"
+status_cmd = "openclaw status --deep"
+
+[system]
+dns_host = "api.telegram.org"
+tcp_host = "1.1.1.1"
+tcp_port = 53
+
+[telegram]
+bot_token = "replace-with-bot-token"
+chat_id = "replace-with-chat-id"
+
+[paths]
+log_file = "logs/healthd.jsonl"
+state_file = "logs/state.json"
+
