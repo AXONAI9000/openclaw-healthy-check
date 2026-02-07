@@ -13,6 +13,7 @@ from oc_healthd.checks import (
 from oc_healthd.config import AppConfig, load_config
 from oc_healthd.daemon import HealthDaemon
 from oc_healthd.notifier import TelegramNotifier
+from oc_healthd.restart import CommandRestarter
 from oc_healthd.state_store import StateStore
 
 
@@ -42,10 +43,15 @@ def run(config_path: str, once: bool = False) -> int:
         chat_id=config.telegram.chat_id,
         timeout_seconds=config.monitor.timeout_seconds,
     )
+    restarter = CommandRestarter(
+        command=config.openclaw.restart_cmd,
+        timeout_seconds=config.monitor.timeout_seconds,
+    )
     daemon = HealthDaemon(
         threshold=config.monitor.failure_threshold,
         checks=build_checks(config),
         notifier=notifier,
+        restarter=restarter,
         state_store=StateStore(config.paths.state_file),
         log_file=config.paths.log_file,
     )
@@ -83,4 +89,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

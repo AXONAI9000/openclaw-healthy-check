@@ -13,6 +13,7 @@ Standalone macOS watchdog for OpenClaw with strict health checks and Telegram al
 - `openclaw status --deep --json`
 - 系统探针（DNS + TCP）
 - 严格模式: 任一层连续 3 次失败即判定故障
+- 自动自愈: 仅在 `HEALTHY -> UNHEALTHY` 且 OpenClaw 层失败时执行一次 `openclaw gateway restart`
 - 通知降噪: 故障 1 条，恢复 1 条，不刷屏
 - 通过 `launchd` 开机自启动
 
@@ -79,6 +80,7 @@ launchctl print gui/$(id -u)/com.openclaw.healthd | head -n 40
 - `HEALTHY -> UNHEALTHY`: 首次故障时发 1 条 Telegram
 - `UNHEALTHY -> HEALTHY`: 完全恢复时发 1 条 Telegram
 - 非状态跃迁不发送通知
+- 故障进入时如果是 OpenClaw 相关失败，会尝试自动重启一次
 
 ## Development
 

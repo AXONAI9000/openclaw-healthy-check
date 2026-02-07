@@ -23,6 +23,7 @@ class MonitorConfig:
 class OpenClawConfig:
     health_cmd: str = "openclaw health --json"
     status_cmd: str = "openclaw status --deep"
+    restart_cmd: str = "openclaw gateway restart"
 
 
 @dataclass(frozen=True)
@@ -99,6 +100,7 @@ def load_config(path: str) -> AppConfig:
     openclaw_cfg = OpenClawConfig(
         health_cmd=str(openclaw.get("health_cmd", "openclaw health --json")),
         status_cmd=str(openclaw.get("status_cmd", "openclaw status --deep")),
+        restart_cmd=str(openclaw.get("restart_cmd", "openclaw gateway restart")),
     )
     system_cfg = SystemConfig(
         dns_host=str(system.get("dns_host", "api.telegram.org")),

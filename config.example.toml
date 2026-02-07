@@ -6,6 +6,7 @@ timeout_seconds = 10
 [openclaw]
 health_cmd = "openclaw health --json"
 status_cmd = "openclaw status --deep"
+restart_cmd = "openclaw gateway restart"
 
 [system]
 dns_host = "api.telegram.org"
@@ -19,4 +20,3 @@ chat_id = "replace-with-chat-id"
 [paths]
 log_file = "logs/healthd.jsonl"
 state_file = "logs/state.json"
-
