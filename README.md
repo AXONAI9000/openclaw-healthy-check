@@ -42,10 +42,11 @@ cp config.example.toml config.toml
 PYTHONPATH=src python3 -m oc_healthd.main --config config.toml --once
 ```
 
-5. 前台运行（调试）
+5. 更方便的启动方式（推荐）
 
 ```bash
-PYTHONPATH=src python3 -m oc_healthd.main --config config.toml
+./scripts/run-healthd.sh --once
+./scripts/run-healthd.sh
 ```
 
 ## Run As LaunchAgent (Recommended)
